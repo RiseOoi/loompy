@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>LoomConnection (class) &#8212; loompy 2.0.13 documentation</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="LayerManager (class)" href="layer_manager.html" />
+    <link rel="prev" title="combine (function)" href="combine.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-light navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/Loom_icon.png"></span>
+          Loom</a>
+        <span class="navbar-text navbar-version pull-left"><b>2.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="http://loompy.org">loompy.org</a></li>
+                <li><a href="https://github.com/linnarsson-lab/loompy">GitHub</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Loompy documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation/index.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/index.html#easy-installation">Easy installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/index.html#from-source">From source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/index.html#getting-started">Getting Started</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../semantics/index.html">Understanding the semantics of loom files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../semantics/index.html#connecting-not-loading-and-saving">Connecting, not loading and saving</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../semantics/index.html#reading-and-writing">Reading and writing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../semantics/index.html#efficient-indexing-and-compression">Efficient indexing and compression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../semantics/index.html#matrix-and-attributes">Matrix and attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../semantics/index.html#data-types">Data types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../apiwalkthrough/index.html">API Walkthrough</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../apiwalkthrough/index.html#creating-and-connecting">Creating and connecting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../apiwalkthrough/index.html#manipulate-data">Manipulate data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cookbook/index.html">Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/index.html#working-with-a-newly-created-file">Working with a newly created file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/index.html#loading-attributes-from-pandas">Loading attributes from Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/index.html#combining-data-using-scan-and-new">Combining data using scan() and new()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cookbook/index.html#fitting-an-incremental-pca">Fitting an incremental PCA</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions/index.html">Conventions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../conventions/index.html#single-analysis-per-file">Single analysis per file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conventions/index.html#orientation">Orientation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conventions/index.html#attribute-naming-conventions">Attribute naming conventions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../format/index.html">Loom file format specs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../format/index.html#versions">Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../format/index.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../format/index.html#hdf5-concepts">HDF5 concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../format/index.html#specification">Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../format/index.html#datatypes">Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../format/index.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Complete API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="create.html">create (function)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new.html">new (function)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create_from_cellranger.html">create_from_cellranger (function)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connect.html">connect (function)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="combine.html">combine (function)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">LoomConnection (class)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layer_manager.html">LayerManager (class)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory_loom_layer.html">MemoryLoomLayer (class)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loom_layer.html">LoomLayer (class)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="view_manager.html">ViewManager (class)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loom_view.html">LoomView (class)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loom_validator.html">LoomValidator (class)</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><div class="list-group">
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Loompy documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../semantics/index.html">Understanding the semantics of loom files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apiwalkthrough/index.html">API Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cookbook/index.html">Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions/index.html">Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../format/index.html">Loom file format specs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Complete API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="create.html">create (function)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new.html">new (function)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create_from_cellranger.html">create_from_cellranger (function)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connect.html">connect (function)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="combine.html">combine (function)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">LoomConnection (class)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layer_manager.html">LayerManager (class)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory_loom_layer.html">MemoryLoomLayer (class)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loom_layer.html">LoomLayer (class)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="view_manager.html">ViewManager (class)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loom_view.html">LoomView (class)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loom_validator.html">LoomValidator (class)</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  <div class="section" id="loomconnection-class">
+<h1>LoomConnection (class)<a class="headerlink" href="#loomconnection-class" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="loompy.loompy.LoomConnection">
+<em class="property">class </em><code class="descclassname">loompy.loompy.</code><code class="descname">LoomConnection</code><span class="sig-paren">(</span><em>filename: str</em>, <em>mode: str = 'r+'</em>, <em>*</em>, <em>validate: bool = True</em>, <em>spec_version: str = '2.0.1'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/loompy/loompy.html#LoomConnection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loompy.loompy.LoomConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>A connection to a Loom file on disk. Typically LoomConnection objects are created using one of the
+functions on the loompy module, such as <a class="reference internal" href="connect.html#loompy.connect" title="loompy.connect"><code class="xref py py-func docutils literal notranslate"><span class="pre">loompy.connect()</span></code></a> or <a class="reference internal" href="new.html#loompy.new" title="loompy.new"><code class="xref py py-func docutils literal notranslate"><span class="pre">loompy.new()</span></code></a>. LoomConnection
+objects are context managers and should normally be
+wrapped in a <code class="docutils literal notranslate"><span class="pre">with</span></code> block:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">loompy</span>
+<span class="k">with</span> <span class="n">loompy</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;mydata.loom&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
+     <span class="k">print</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Inside the <code class="docutils literal notranslate"><span class="pre">with</span></code> block, you can access the dataset (here using the variable <code class="docutils literal notranslate"><span class="pre">ds</span></code>). When execution
+leaves the <code class="docutils literal notranslate"><span class="pre">with</span></code> block, the connection is automatically closed, freeing up resources.</p>
+<dl class="method">
+<dt id="loompy.loompy.LoomConnection.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>filename: str</em>, <em>mode: str = 'r+'</em>, <em>*</em>, <em>validate: bool = True</em>, <em>spec_version: str = '2.0.1'</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/loompy/loompy.html#LoomConnection.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loompy.loompy.LoomConnection.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Establish a connection to a Loom file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> – Name of the .loom file to open</li>
+<li><strong>mode</strong> – read/write mode, accepts ‘r+’ (read/write) or
+‘r’ (read-only), defaults to ‘r+’ without arguments,
+and to ‘r’ with incorrect arguments</li>
+<li><strong>validate</strong> – Validate that the file conforms with the Loom specification</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Nothing.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="loompy.loompy.LoomConnection.filename">
+<code class="descname">filename</code><em class="property"> = None</em><a class="headerlink" href="#loompy.loompy.LoomConnection.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to the file (as given when the LoomConnection was created)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="loompy.loompy.LoomConnection.shape">
+<code class="descname">shape</code><em class="property"> = None</em><a class="headerlink" href="#loompy.loompy.LoomConnection.shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shape of the dataset (n_rows, n_cols)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="loompy.loompy.LoomConnection.layers">
+<code class="descname">layers</code><em class="property"> = None</em><a class="headerlink" href="#loompy.loompy.LoomConnection.layers" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dict-like interface to named layers. Keys are strings (the main matrix is named “”) and
+values are sliceable <a class="reference internal" href="loom_layer.html#loompy.LoomLayer" title="loompy.LoomLayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoomLayer</span></code></a> objects that support fancy indexing like numpy.ndarray objects.</p>
+<p>To read an entire layer into memory, use <code class="docutils literal notranslate"><span class="pre">ds.layers[name][:,</span> <span class="pre">:]</span></code> (i.e. select all rows and all columns).
+Layers can also be loaded as sparse matrices by <code class="docutils literal notranslate"><span class="pre">ds.layers[name].sparse()</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">loompy</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;mydataset.loom&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;There are {len(ds.layers)} layers&quot;</span><span class="p">)</span>
+   <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+       <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">layer</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">layer</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="loompy.loompy.LoomConnection.view">
+<code class="descname">view</code><em class="property"> = None</em><a class="headerlink" href="#loompy.loompy.LoomConnection.view" title="Permalink to this definition">¶</a></dt>
+<dd><p>100]``</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">Create a view of the file by slicing this attribute, like </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body">100,</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="loompy.loompy.LoomConnection.ra">
+<code class="descname">ra</code><em class="property"> = None</em><a class="headerlink" href="#loompy.loompy.LoomConnection.ra" title="Permalink to this definition">¶</a></dt>
+<dd><p>Row attributes, dict-like with np.ndarray values</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="loompy.loompy.LoomConnection.ca">
+<code class="descname">ca</code><em class="property"> = None</em><a class="headerlink" href="#loompy.loompy.LoomConnection.ca" title="Permalink to this definition">¶</a></dt>
+<dd><p>Column attributes, dict-like with np.ndarray values</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="loompy.loompy.LoomConnection.attrs">
+<code class="descname">attrs</code><em class="property"> = None</em><a class="headerlink" href="#loompy.loompy.LoomConnection.attrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Global attributes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="loompy.loompy.LoomConnection.row_graphs">
+<code class="descname">row_graphs</code><em class="property"> = None</em><a class="headerlink" href="#loompy.loompy.LoomConnection.row_graphs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Row graphs, dict-like with values that are <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.coo_matrix.html#scipy.sparse.coo_matrix" title="(in SciPy v1.1.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.coo_matrix</span></code></a> objects</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="loompy.loompy.LoomConnection.col_graphs">
+<code class="descname">col_graphs</code><em class="property"> = None</em><a class="headerlink" href="#loompy.loompy.LoomConnection.col_graphs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Column graphs, dict-like with values that are <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.coo_matrix.html#scipy.sparse.coo_matrix" title="(in SciPy v1.1.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.coo_matrix</span></code></a> objects</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="loompy.loompy.LoomConnection.mode">
+<code class="descname">mode</code><a class="headerlink" href="#loompy.loompy.LoomConnection.mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>The access mode of the connection (‘r’ or ‘r+’)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="loompy.loompy.LoomConnection.last_modified">
+<code class="descname">last_modified</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../_modules/loompy/loompy.html#LoomConnection.last_modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loompy.loompy.LoomConnection.last_modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an ISO8601 timestamp indicating when the file was last modified</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An ISO8601 timestamp indicating when the file was last modified</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Remarks:</dt>
+<dd>If the file has no timestamp, and mode is ‘r+’, a new timestamp is created and returned.
+Otherwise, the current time in UTC is returned</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="loompy.loompy.LoomConnection.get_changes_since">
+<code class="descname">get_changes_since</code><span class="sig-paren">(</span><em>timestamp: str</em><span class="sig-paren">)</span> &#x2192; Dict[str, List]<a class="reference internal" href="../_modules/loompy/loompy.html#LoomConnection.get_changes_since"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loompy.loompy.LoomConnection.get_changes_since" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a summary of the parts of the file that changed since the given time</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>timestamp</strong> – ISO8601 timestamp</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dictionary like <code class="docutils literal notranslate"><span class="pre">{&quot;row_graphs&quot;:</span> <span class="pre">rg,</span> <span class="pre">&quot;col_graphs&quot;:</span> <span class="pre">cg,</span> <span class="pre">&quot;row_attrs&quot;:</span> <span class="pre">ra,</span> <span class="pre">&quot;col_attrs&quot;:</span> <span class="pre">ca,</span> <span class="pre">&quot;layers&quot;:</span> <span class="pre">layers}</span></code> listing the names of objects that were modified since the given time</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="loompy.loompy.LoomConnection.sparse">
+<code class="descname">sparse</code><span class="sig-paren">(</span><em>rows: numpy.ndarray = None</em>, <em>cols: numpy.ndarray = None</em>, <em>layer: str = None</em><span class="sig-paren">)</span> &#x2192; scipy.sparse.coo.coo_matrix<a class="reference internal" href="../_modules/loompy/loompy.html#LoomConnection.sparse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loompy.loompy.LoomConnection.sparse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the main matrix or specified layer as a scipy.sparse.coo_matrix, without loading dense matrix in RAM</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rows</strong> – Rows to include, or None to include all</li>
+<li><strong>cols</strong> – Columns to include, or None to include all</li>
+<li><strong>layer</strong> – Layer to return, or None to return the default layer</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Sparse matrix (<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.coo_matrix.html#scipy.sparse.coo_matrix" title="(in SciPy v1.1.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.sparse.coo_matrix</span></code></a>)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="loompy.loompy.LoomConnection.close">
+<code class="descname">close</code><span class="sig-paren">(</span><em>suppress_warning: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/loompy/loompy.html#LoomConnection.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loompy.loompy.LoomConnection.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the connection. After this, the connection object becomes invalid. Warns user if called after closing.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>suppress_warning</strong> – Suppresses warning message if True (defaults to false)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="loompy.loompy.LoomConnection.closed">
+<code class="descname">closed</code><a class="headerlink" href="#loompy.loompy.LoomConnection.closed" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if the connection is closed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="loompy.loompy.LoomConnection.add_columns">
+<code class="descname">add_columns</code><span class="sig-paren">(</span><em>layers: Union[numpy.ndarray, Dict[str, numpy.ndarray], loompy.layer_manager.LayerManager], col_attrs: Dict[str, numpy.ndarray], *, row_attrs: Dict[str, numpy.ndarray] = None, fill_values: Dict[str, numpy.ndarray] = None</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/loompy/loompy.html#LoomConnection.add_columns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loompy.loompy.LoomConnection.add_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add columns of data and attribute values to the dataset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>layers</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a><em> or </em><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.15)"><em>numpy.ndarray</em></a><em> or </em><a class="reference internal" href="layer_manager.html#loompy.LayerManager" title="loompy.LayerManager"><em>LayerManager</em></a>) – Either:
+1) A N-by-M matrix of float32s (N rows, M columns) in this case columns are added at the default layer
+2) A dict {layer_name : matrix} specified so that the matrix (N, M) will be added to layer <cite>layer_name</cite>
+3) A LayerManager object (such as what is returned by view.layers)</li>
+<li><strong>col_attrs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Column attributes, where keys are attribute names and values are numpy arrays (float or string) of length M</li>
+<li><strong>row_attrs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)"><em>dict</em></a>) – Optional row attributes, where keys are attribute names and values are numpy arrays (float or string) of length M</li>
+<li><strong>fill_values</strong> – dictionary of values to use if a column attribute is missing, or “auto” to fill with zeros or empty strings</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Nothing.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>This will modify the underlying HDF5 file, which will interfere with any concurrent readers.</li>
+<li>Column attributes in the file that are NOT provided, will be deleted (unless fill value provided).</li>
+<li>Array with Nan should not be provided</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="loompy.loompy.LoomConnection.add_loom">
+<code class="descname">add_loom</code><span class="sig-paren">(</span><em>other_file: str</em>, <em>key: str = None</em>, <em>fill_values: Dict[str</em>, <em>numpy.ndarray] = None</em>, <em>batch_size: int = 1000</em>, <em>convert_attrs: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/loompy/loompy.html#LoomConnection.add_loom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loompy.loompy.LoomConnection.add_loom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the content of another loom file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>other_file</strong> – filename of the loom file to append</li>
+<li><strong>key</strong> – Primary key to use to align rows in the other file with this file</li>
+<li><strong>fill_values</strong> – default values to use for missing attributes (or None to drop missing attrs, or ‘auto’ to fill with sensible defaults)</li>
+<li><strong>batch_size</strong> – the batch size used by batchscan (limits the number of rows/columns read in memory)</li>
+<li><strong>convert_attrs</strong> – convert file attributes that differ between files into column attributes</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Nothing, but adds the loom file. Note that the other loom file must have exactly the same
+number of rows, and must have exactly the same column attributes.
+The all the contents including layers but ignores layers in <cite>other_file</cite> that are not already present in self</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="loompy.loompy.LoomConnection.scan">
+<code class="descname">scan</code><span class="sig-paren">(</span><em>*</em>, <em>items: numpy.ndarray = None</em>, <em>axis: int = None</em>, <em>layers: Iterable = None</em>, <em>key: str = None</em>, <em>batch_size: int = 512</em><span class="sig-paren">)</span> &#x2192; Iterable[Tuple[int, numpy.ndarray, loompy.loom_view.LoomView]]<a class="reference internal" href="../_modules/loompy/loompy.html#LoomConnection.scan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loompy.loompy.LoomConnection.scan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scan across one axis and return batches of rows (columns) as LoomView objects</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>items</strong> (<em>np.ndarray</em>) – the indexes [0, 2, 13, … ,973] of the rows/cols to include along the axis
+OR: boolean mask array giving the rows/cols to include</li>
+<li><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – 0:rows or 1:cols</li>
+<li><strong>batch_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the chuncks returned at every element of the iterator</li>
+<li><strong>layers</strong> (<em>iterable</em>) – if specified it will batch scan only across some of the layers of the loom file
+if layers == None, all layers will be scanned
+if layers == [“”] or “”, only the default layer will be scanned</li>
+<li><strong>key</strong> – Name of primary key attribute. If specified, return the values sorted by the key</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><em>Iterable that yields triplets of (ix, indexes, view) where</em></li>
+<li><strong>ix</strong> (<em>int</em>) – first position / how many rows/cols have been yielded alredy</li>
+<li><strong>indexes</strong> (<em>np.ndarray[int]</em>) – the indexes with the same numbering of the input args cells / genes (i.e. <code class="docutils literal notranslate"><span class="pre">np.arange(len(ds.shape[axis]))</span></code>)
+this is <code class="docutils literal notranslate"><span class="pre">ix</span> <span class="pre">+</span> <span class="pre">selection</span></code></li>
+<li><strong>view</strong> (<em>LoomView</em>) – a view corresponding to the current chunk</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="loompy.loompy.LoomConnection.map">
+<code class="descname">map</code><span class="sig-paren">(</span><em>f_list: List[Callable[numpy.ndarray, int]], *, axis: int = 0, chunksize: int = 1000, selection: numpy.ndarray = None</em><span class="sig-paren">)</span> &#x2192; List[numpy.ndarray]<a class="reference internal" href="../_modules/loompy/loompy.html#LoomConnection.map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loompy.loompy.LoomConnection.map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a function along an axis without loading the entire dataset in memory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>f</strong> – Function(s) that takes a numpy ndarray as argument</li>
+<li><strong>axis</strong> – Axis along which to apply the function (0 = rows, 1 = columns)</li>
+<li><strong>chunksize</strong> – Number of rows (columns) to load per chunk</li>
+<li><strong>selection</strong> – Columns (rows) to include</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">numpy.ndarray result of function application
+The result is a list of numpy arrays, one per supplied function in f_list.
+This is more efficient than repeatedly calling map() one function at a time.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="loompy.loompy.LoomConnection.permute">
+<code class="descname">permute</code><span class="sig-paren">(</span><em>ordering: numpy.ndarray</em>, <em>axis: int</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/loompy/loompy.html#LoomConnection.permute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loompy.loompy.LoomConnection.permute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Permute the dataset along the indicated axis.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ordering</strong> (<em>list of int</em>) – The desired order along the axis</li>
+<li><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – The axis along which to permute</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Nothing.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="loompy.loompy.LoomConnection.pandas">
+<code class="descname">pandas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/loompy/loompy.html#LoomConnection.pandas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loompy.loompy.LoomConnection.pandas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Pandas DataFrame corresponding to (selected parts of) the Loom file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>row_attr</strong> – Name of the row attribute to use for selecting rows to include (or None to omit row data)</li>
+<li><strong>selector</strong> – A list, a tuple, a numpy.ndarray or a slice; used to select rows (or None to include all rows)</li>
+<li><strong>columns</strong> – A list of column attributes to include, or None to include all</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Pandas DataFrame</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Remarks:</dt>
+<dd>The method returns a Pandas DataFrame with one column per row of the Loom file (i.e. transposed), which is usually
+what is required for plotting and statistical analysis. By default, all column attributes and no rows are included.
+To include row data, provide a <code class="docutils literal notranslate"><span class="pre">row_attr</span></code> and a <code class="docutils literal notranslate"><span class="pre">selector</span></code>. The selector is matched against values of the given
+row attribute, and matching rows are included.</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">loompy</span>
+<span class="k">with</span> <span class="n">loompy</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;mydata.loom&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
+        <span class="c1"># Include all column attributes, and rows where attribute &quot;Gene&quot; matches one of the given genes</span>
+        <span class="n">df1</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">pandas</span><span class="p">(</span><span class="s2">&quot;Gene&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Actb&quot;</span><span class="p">,</span> <span class="s2">&quot;Npy&quot;</span><span class="p">,</span> <span class="s2">&quot;Vip&quot;</span><span class="p">,</span> <span class="s2">&quot;Pvalb&quot;</span><span class="p">])</span>
+        <span class="c1"># Include the top 100 rows and name them after values of the &quot;Gene&quot; attribute</span>
+        <span class="n">df2</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">pandas</span><span class="p">(</span><span class="s2">&quot;Gene&quot;</span><span class="p">,</span> <span class="p">:</span><span class="mi">100</span><span class="p">)</span>
+        <span class="c1"># Include the entire dataset, and name the rows after values of the &quot;Accession&quot; attribute</span>
+        <span class="n">df3</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">pandas</span><span class="p">(</span><span class="s2">&quot;Accession&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="loompy.loompy.LoomConnection.export">
+<code class="descname">export</code><span class="sig-paren">(</span><em>out_file: str</em>, <em>layer: str = None</em>, <em>format: str = 'tab'</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/loompy/loompy.html#LoomConnection.export"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loompy.loompy.LoomConnection.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export the specified layer and row/col attributes as tab-delimited file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>out_file</strong> – Path to the output file</li>
+<li><strong>layer</strong> – Name of the layer to export, or None to export the main matrix</li>
+<li><strong>format</strong> – Desired file format (only ‘tab’ is supported)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2017, LinnarssonLab.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.0+/0ce0dfb.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
